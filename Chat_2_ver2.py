@@ -13,12 +13,6 @@ def read_chat(room_num):
 		te = x.split('/')[2]
 		print(na+' said: '+te+'\t in room '+ro)
 
-def read_path():
-	print('Bat dau thread 2')
-	time.sleep(0.5)
-	while 1:
-		x = os.system('cat 000_2')
-
 
 a = os.popen('python Chat_1_ver2.py Tuan 934 2').read().split('\n')[0]
 nam = a.split('/')[0]
