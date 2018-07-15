@@ -13,11 +13,10 @@ def read_chat(room_num):
 		te = x.split('/')[2]
 		print(na+' said: '+te+'\t in room '+ro)
 
+nam = sys.argv[1]
+roo = sys.argv[2]
 
-a = os.popen('python Chat_1_ver2.py Tuan 934 2').read().split('\n')[0]
-nam = a.split('/')[0]
-roo = a.split('/')[1]
-tex = a.split('/')[2]
+a = os.popen('python Chat_1_ver2.py '+nam+' '+roo+' 2').read().split('\n')[0]
 
 os.system('echo 1,'+nam+','+roo+' > 000_1')
 
@@ -25,8 +24,9 @@ while 1:
 	if check_path:
 		#print('check_path is ok')
 		a = os.popen('python Chat_1_ver2.py Tuan 934 2').read().split('\n')[0]
-		print('said: '+a) 
-		#os.system('echo '+name+'/'+room+'/'+text+' > '+room_pub)
+		tex = a.split('/')[2]
+		#print('said: '+a) 
+		os.system('echo '+nam+'/'+roo+'/'+tex+' > '+room_pub)
 		#time.sleep(1)
 	elif len(a) > 2:
 		a = os.popen('cat 000_2').read().split('\n')[0]  
