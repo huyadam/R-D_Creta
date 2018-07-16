@@ -30,22 +30,25 @@ def reg_user(room_num):
 			os.system('echo '+na+','+ro+','+room_pub+','+room_sub+' > 000_2')
 			print(na+','+ro+','+room_pub+','+room_sub)
 
-def read_client():
+def read_client(pointer):
 	global table
 	while 1:
-		for pointer in range(0,5):
-			if table[pointer][0] != '':
-				txt = os.popen('cat '+table[pointer][2]).read().split('\n')[0]
-				print('message come in')
-				if len(txt)>2:
-					#print('message come in')
-					for room_gr in range(0,5):
-						if table[room_gr][1] == table[pointer][1]:
-							os.system('echo '+txt+' > '+table[room_gr][3])
-							print('echo '+txt+' > '+table[room_gr][3])
+		if table[pointer][0] != '':
+			txt = os.popen('cat '+table[pointer][2]).read().split('\n')[0]
+			print('message come in')
+			if len(txt)>2:
+				#print('message come in')
+				for room_gr in range(0,5):
+					if table[room_gr][1] == table[pointer][1]:
+						os.system('echo '+txt+' > '+table[room_gr][3])
+						print('echo '+txt+' > '+table[room_gr][3])
 
 try:
-	thread.start_new_thread( read_client, ()  )
+	thread.start_new_thread( read_client, (0, )  )
+	thread.start_new_thread( read_client, (1, )  )
+	thread.start_new_thread( read_client, (2, )  )
+	thread.start_new_thread( read_client, (3, )  )
+	thread.start_new_thread( read_client, (4, )  )
 	thread.start_new_thread( reg_user, (123, ) )
 except:
 	print "Error: khong the bat dau thread"
